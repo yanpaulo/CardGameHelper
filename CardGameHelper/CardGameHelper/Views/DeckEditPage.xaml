@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CardGameHelper.Views.DeckEditPage"
+             xmlns:vm="clr-namespace:CardGameHelper.ViewModels">
+    <ContentView.BindingContext>
+        <vm:DeckEditViewModel></vm:DeckEditViewModel>
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <SearchBar 
+                    Text="{Binding SearchText}"
+                    TextChanged="SearchBar_TextChanged"></SearchBar>
+                <Button 
+                    Grid.Column="1" 
+                    IsVisible="{Binding CardsFound, Converter={StaticResource NegatedValueConverter}}"
+                    Clicked="Button_Clicked" Text="Create"></Button>
+            </Grid>
+
+            <ListView Grid.Row="1" ItemsSource="{Binding DeckCards}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Card.Name}"></Label>
+
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="{Binding Count}" HorizontalTextAlignment="Center"></Label>
+                                    <Stepper Value="{Binding Count}" Minimum="1" Increment="1"></Stepper>
+                                </StackLayout>
+
+                                <Button Grid.Column="2" Text="Remove"></Button>
+                            </Grid>
+                        </ViewCell>
+                        
+                    </DataTemplate>
+                    
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                <Label>Cards on Deck: </Label>
+                <Label Text="{Binding Deck.CardsCount}"></Label>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentPage>
