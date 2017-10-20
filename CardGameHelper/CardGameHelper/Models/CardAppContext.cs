@@ -44,6 +44,12 @@ namespace CardGameHelper.Models
             await db.AddCardAsync(c);
         }
 
+        public async Task AddDeckAsync(Deck deck)
+        {
+            await db.SaveDeckAsync(deck);
+            Decks.Add(deck);
+        }
+
         public async Task UpdateDeckAsync(Deck deck)
         {
             var old = Decks.Single(d => d.Id == deck.Id);

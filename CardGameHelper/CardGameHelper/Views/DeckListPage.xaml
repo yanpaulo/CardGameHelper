@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CardGameHelper.Views.DeckListPage"
+             x:Name="Root"
              Appearing="ContentPage_Appearing">
     <ListView
             ItemsSource="{Binding Decks}"
@@ -29,6 +30,7 @@
                                 Clicked="SelectDeckButton_Clicked"></Button>
                             <Button 
                                 Text="Remove"
+                                IsEnabled="{Binding Path=BindingContext.CanRemoveDeck,Source={x:Reference Root}}"
                                 Clicked="RemoveDeckButton_Clicked"></Button>
                         </StackLayout>
                     </Grid>
@@ -37,4 +39,7 @@
         </ListView.ItemTemplate>
 
     </ListView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Create" Clicked="CreateToolbarItem_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
 </ContentPage>

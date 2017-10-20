@@ -61,6 +61,11 @@ namespace CardGameHelper.Models
 
         }
         
+        public async Task SaveDeckAsync(Deck deck)
+        {
+            await connection.InsertAsync(deck);
+        }
+
         public async Task UpdateDeckAsync(Deck deck)
         {
             await connection.ExecuteAsync($"DELETE FROM DeckCard WHERE DeckId={deck.Id}");

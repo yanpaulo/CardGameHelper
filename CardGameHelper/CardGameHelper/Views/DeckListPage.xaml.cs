@@ -52,5 +52,10 @@ namespace CardGameHelper.Views
                 (sender as Button).BindingContext as DeckListViewModelItem;
             viewModel.RemoveDeck(item);
         }
+
+        private async void CreateToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new DeckCreatePage());
+        }
     }
 }
