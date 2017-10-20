@@ -11,17 +11,15 @@ namespace CardGameHelper.Models
 {
     public class Deck : ObservableObject
     {
-        private static int idGen;
-
         public Deck()
         {
             Cards.CollectionChanged += Cards_CollectionChanged;
         }
 
         [PrimaryKey, AutoIncrement]
-        public int Id { get; set; } = ++idGen;
+        public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = "My Deck";
 
         [Ignore]
         public int CardsCount => 

@@ -84,15 +84,9 @@ namespace CardGameHelper.ViewModels
             DoSearch();
         }
 
-        public void SaveDeck()
+        public async Task SaveDeckAsync()
         {
-            var old = context.Decks.Single(d => d.Id == Deck.Id);
-            context.Decks[context.Decks.IndexOf(old)] = Deck;
-
-            if (old.Id == context.SelectedDeck.Id)
-            {
-                context.SelectedDeck = Deck.AsCopy();
-            }
+            await context.UpdateDeckAsync(Deck);
         }
     }
 }

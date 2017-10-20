@@ -12,12 +12,14 @@ namespace CardGameHelper.Models
         private CardGameDb db = CardGameDb.Instance;
 
         private CardAppContext()
-        {
-            SelectedDeck = Decks[0].AsCopy();
+        {   
             Task.Run(() =>
             {
+                Decks = new ObservableCollection<Deck>(db.GetDecksAsync().Result);
                 Cards = new ObservableCollection<Card>(db.GetCardsAsync().Result);
             }).Wait();
+
+            SelectedDeck = Decks[0].AsCopy();
         }
 
         private Deck selectedDeck;
@@ -32,17 +34,27 @@ namespace CardGameHelper.Models
         }
 
         public ObservableCollection<Deck> Decks { get; set; }
-            = new ObservableCollection<Deck>()
-                { new Deck{ Name = "É culpa do Hemir!" }, new Deck{ Name = "Deckzim!" } };
 
         public ObservableCollection<Card> Cards { get; set; }
-            = new ObservableCollection<Card>();
 
 
         public async Task AddCardAsync(Card c)
         {
             Cards.Add(c);
             await db.AddCardAsync(c);
+        }
+
+        public async Task UpdateDeckAsync(Deck deck)
+        {
+            var old = Decks.Single(d => d.Id == deck.Id);
+            Decks[Decks.IndexOf(old)] = deck;
+
+            if (old.Id == SelectedDeck.Id)
+            {
+                SelectedDeck = deck.AsCopy();
+            }
+
+            await db.UpdateDeckAsync(deck);
         }
     }
 }
