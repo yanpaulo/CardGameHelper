@@ -9,9 +9,15 @@ namespace CardGameHelper.Models
 {
     public class CardAppContext : ObservableObject
     {
+        private CardGameDb db = CardGameDb.Instance;
+
         private CardAppContext()
         {
             SelectedDeck = Decks[0].AsCopy();
+            Task.Run(() =>
+            {
+                Cards = new ObservableCollection<Card>(db.GetCardsAsync().Result);
+            }).Wait();
         }
 
         private Deck selectedDeck;
@@ -32,5 +38,11 @@ namespace CardGameHelper.Models
         public ObservableCollection<Card> Cards { get; set; }
             = new ObservableCollection<Card>();
 
+
+        public async Task AddCardAsync(Card c)
+        {
+            Cards.Add(c);
+            await db.AddCardAsync(c);
+        }
     }
 }

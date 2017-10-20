@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -14,18 +15,20 @@ namespace CardGameHelper.Models
 
         public Deck()
         {
-            Cards = new ObservableCollection<DeckCard>();
             Cards.CollectionChanged += Cards_CollectionChanged;
         }
 
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; } = ++idGen;
 
         public string Name { get; set; }
 
+        [Ignore]
         public int CardsCount => 
             Cards.Sum(c => c.Count);
 
-        public ObservableCollection<DeckCard> Cards { get; set; }
+        [Ignore]
+        public ObservableCollection<DeckCard> Cards { get; set; } = new ObservableCollection<DeckCard>();
 
 
         public Deck AsCopy() =>

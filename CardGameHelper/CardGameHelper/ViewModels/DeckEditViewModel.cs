@@ -12,6 +12,7 @@ namespace CardGameHelper.ViewModels
         private string searchText;
         private IList<DeckCard> deckCards;
         private CardAppContext context = CardAppContext.Instance;
+        private CardGameDb db = CardGameDb.Instance;
 
         public DeckEditViewModel() : this(CardAppContext.Instance.SelectedDeck, false)
         { }
@@ -48,7 +49,7 @@ namespace CardGameHelper.ViewModels
 
         public void DoSearch()
         {
-            var searchText = this.searchText ?? "";
+            var searchText = SearchText ?? "";
             List<DeckCard> cards = new List<DeckCard>();
             var existing =
                 Deck.Cards
@@ -56,26 +57,30 @@ namespace CardGameHelper.ViewModels
 
             cards.AddRange(existing);
 
-            var existingNames = cards.Select(c => c.Card.Name);
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                var existingNames = cards.Select(c => c.Card.Name);
 
-            var others =
-                context.Cards
-                    .Where(c => !existingNames.Contains(c.Name) && c.Name.ToLower().Contains(searchText.ToLower()))
-                    .Select(c => new DeckCard { Card = c });
+                var others =
+                    context.Cards
+                        .Where(c => !existingNames.Contains(c.Name) && c.Name.ToLower().Contains(searchText.ToLower()))
+                        .Select(c => new DeckCard { Card = c });
 
-            cards.AddRange(others);
+                cards.AddRange(others); 
+            }
 
             DeckCards = cards;
         }
 
-        public void CreateCard()
+        public async void CreateCard()
         {
             var card = new Card { Name = SearchText };
             var deckCard = new DeckCard { Card = card, Count = 1 };
 
             Deck.Cards.Add(deckCard);
-            context.Cards.Add(card);
 
+            await context.AddCardAsync(card);
+            
             DoSearch();
         }
 

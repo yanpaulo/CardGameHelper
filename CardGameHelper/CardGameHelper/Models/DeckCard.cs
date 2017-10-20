@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,10 @@ namespace CardGameHelper.Models
     {
         private int count;
 
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        [Ignore]
         public Card Card { get; set; }
         
         public int Count
@@ -18,5 +23,10 @@ namespace CardGameHelper.Models
             set { count = value; OnPropertyChanged(); }
         }
 
+        [Indexed]
+        public int CardId { get; set; }
+
+        [Indexed]
+        public int DeckId { get; set; }
     }
 }
