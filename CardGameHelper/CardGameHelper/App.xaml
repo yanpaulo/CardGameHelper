@@ -9,7 +9,6 @@
             <converters:NegatedValueConverter x:Key="NegatedValueConverter"></converters:NegatedValueConverter>
             <converters:IntToBoolValueConverter x:Key="IntToBoolValueConverter"></converters:IntToBoolValueConverter>
             <converters:ReverseIntToBoolValueConverter x:Key="ReverseIntToBoolValueConverter"></converters:ReverseIntToBoolValueConverter>
-            <converters:IntGreaterThanValueConverter x:Key="IntGreaterThanValueConverter"></converters:IntGreaterThanValueConverter>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
