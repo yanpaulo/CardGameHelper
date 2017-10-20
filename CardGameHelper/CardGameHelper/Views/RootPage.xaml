@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CardGameHelper.Views.RootPage"
              xmlns:pages="clr-namespace:CardGameHelper.Views">
-  <MasterDetailPage.Master>
-    <pages:RootPageMaster x:Name="MasterPage" />
-  </MasterDetailPage.Master>
-  <MasterDetailPage.Detail>
-    <NavigationPage>
-      <x:Arguments>
-        <pages:RootPageDetail />
-      </x:Arguments>
-    </NavigationPage>
-  </MasterDetailPage.Detail>
+    <MasterDetailPage.Master>
+        <pages:RootPageMaster x:Name="MasterPage" />
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <pages:DeckEditPage />
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
 </MasterDetailPage>

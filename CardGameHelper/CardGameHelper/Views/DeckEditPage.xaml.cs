@@ -20,6 +20,18 @@ namespace CardGameHelper.Views
             viewModel = BindingContext as DeckEditViewModel;
         }
 
+        public DeckEditPage(DeckEditViewModel viewModel)
+        {
+            InitializeComponent();
+            BindingContext = this.viewModel = viewModel;
+            if (viewModel.CanPersist)
+            {
+                var toolbarItem = new ToolbarItem() { Text = "Save" };
+                toolbarItem.Clicked += SaveToolbarItem_Click;
+                ToolbarItems.Add(toolbarItem);
+            }
+        }
+
         private void Button_Clicked(object sender, EventArgs e)
         {
             viewModel.CreateCard();
@@ -28,6 +40,12 @@ namespace CardGameHelper.Views
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             viewModel.DoSearch();
+        }
+
+        private async void SaveToolbarItem_Click(object sender, EventArgs e)
+        {
+            viewModel.SaveDeck();
+            await Navigation.PopAsync();
         }
     }
 }

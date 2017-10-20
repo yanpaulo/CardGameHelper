@@ -50,14 +50,14 @@
                                 <Button Grid.Column="2" Text="Remove"></Button>
                             </Grid>
                         </ViewCell>
-                        
+
                     </DataTemplate>
-                    
+
                 </ListView.ItemTemplate>
             </ListView>
 
             <StackLayout Grid.Row="2" Orientation="Horizontal">
-                <Label>Cards on Deck: </Label>
+                <Label>Cards on Deck:</Label>
                 <Label Text="{Binding Deck.CardsCount}"></Label>
             </StackLayout>
         </Grid>

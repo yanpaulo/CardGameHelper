@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CardGameHelper.Views.DeckListPage"
+             Appearing="ContentPage_Appearing">
+    <ListView
+            ItemsSource="{Binding Decks}"
+            ItemTapped="Handle_ItemTapped"
+            CachingStrategy="RecycleElement">
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Label 
+                            VerticalTextAlignment="Center"
+                            Text="{Binding Deck.Name}"></Label>
+
+                        <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                            <Label VerticalTextAlignment="Center" IsVisible="{Binding IsSelected}">Selected</Label>
+                            <Button 
+                                Text="Select"
+                                IsVisible="{Binding IsSelected, Converter={StaticResource NegatedValueConverter}}"
+                                Clicked="SelectDeckButton_Clicked"></Button>
+                            <Button 
+                                Text="Remove"
+                                Clicked="RemoveDeckButton_Clicked"></Button>
+                        </StackLayout>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+</ContentPage>

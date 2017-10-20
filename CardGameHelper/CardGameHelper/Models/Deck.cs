@@ -10,16 +10,31 @@ namespace CardGameHelper.Models
 {
     public class Deck : ObservableObject
     {
+        private static int idGen;
+
         public Deck()
         {
             Cards = new ObservableCollection<DeckCard>();
             Cards.CollectionChanged += Cards_CollectionChanged;
         }
-        
-        public ObservableCollection<DeckCard> Cards { get; set; } 
 
-        public int CardsCount => Cards.Sum(c => c.Count);
+        public int Id { get; set; } = ++idGen;
 
+        public string Name { get; set; }
+
+        public int CardsCount => 
+            Cards.Sum(c => c.Count);
+
+        public ObservableCollection<DeckCard> Cards { get; set; }
+
+
+        public Deck AsCopy() =>
+            new Deck
+            {
+                Id = Id,
+                Name = Name,
+                Cards = new ObservableCollection<DeckCard>(Cards.Select(dc => new DeckCard { Card = dc.Card, Count = dc.Count }))
+            };
 
         private void Card_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {

@@ -31,8 +31,8 @@ namespace CardGameHelper.Views
             public ObservableCollection<RootPageMenuItem> MenuItems { get; set; } 
                 = new ObservableCollection<RootPageMenuItem>(new[]
                     {
-                        new RootPageMenuItem { Title = "Main", TargetType = typeof(AboutPage) },
-                        new RootPageMenuItem { Title = "Manage Decks", TargetType = typeof(DeckEditPage) },
+                        new RootPageMenuItem { Title = "Main", TargetType = typeof(DeckEditPage) },
+                        new RootPageMenuItem { Title = "Manage Decks", TargetType = typeof(DeckListPage) },
                         new RootPageMenuItem { Title = "About", TargetType = typeof(AboutPage) },
                     });
         }
