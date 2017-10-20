@@ -8,16 +8,16 @@ using Xamarin.Forms;
 
 namespace CardGameHelper.Converters
 {
-    public class NegatedValueConverter : Xamarin.Forms.IValueConverter
+    public class IntToBoolValueConverter : Xamarin.Forms.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return !(bool)value;
+            return (int)value != 0;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return !(bool)value;
+            return (bool)value == true ? 1 : 0;
         }
     }
 }

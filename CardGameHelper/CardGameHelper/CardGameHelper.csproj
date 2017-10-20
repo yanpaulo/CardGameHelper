@@ -38,6 +38,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ReverseIntToBoolValueConverter.cs" />
+    <Compile Include="Converters\IntToBoolValueConverter.cs" />
     <Compile Include="Converters\NegatedValueConverter.cs" />
     <Compile Include="DependencyServices\IPathService.cs" />
     <Compile Include="Models\CardAppContext.cs" />

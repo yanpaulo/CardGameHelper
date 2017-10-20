@@ -7,6 +7,9 @@
         <ResourceDictionary>
             <!-- Application resource dictionary -->
             <converters:NegatedValueConverter x:Key="NegatedValueConverter"></converters:NegatedValueConverter>
+            <converters:IntToBoolValueConverter x:Key="IntToBoolValueConverter"></converters:IntToBoolValueConverter>
+            <converters:ReverseIntToBoolValueConverter x:Key="ReverseIntToBoolValueConverter"></converters:ReverseIntToBoolValueConverter>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

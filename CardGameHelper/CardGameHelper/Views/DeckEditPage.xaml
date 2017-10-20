@@ -26,7 +26,7 @@
                 <Button 
                     Grid.Column="1" 
                     IsVisible="{Binding CardsFound, Converter={StaticResource NegatedValueConverter}}"
-                    Clicked="Button_Clicked" Text="Create"></Button>
+                    Clicked="CreateCardButton_Clicked" Text="Create"></Button>
             </Grid>
 
             <ListView Grid.Row="1" ItemsSource="{Binding DeckCards}">
@@ -42,12 +42,23 @@
 
                                 <Label Text="{Binding Card.Name}"></Label>
 
-                                <StackLayout Grid.Column="1">
+                                <StackLayout 
+                                    Grid.Column="1"
+                                    IsVisible="{Binding Count, Converter={StaticResource IntToBoolValueConverter}}">
                                     <Label Text="{Binding Count}" HorizontalTextAlignment="Center"></Label>
                                     <Stepper Value="{Binding Count}" Minimum="1" Increment="1"></Stepper>
                                 </StackLayout>
 
-                                <Button Grid.Column="2" Text="Remove"></Button>
+                                <Button 
+                                    Grid.Column="1" 
+                                    Text="Add"
+                                    Clicked="AddCardButton_Clicked"
+                                    IsVisible="{Binding Count, Converter={StaticResource ReverseIntToBoolValueConverter}}"></Button>
+
+                                <Button 
+                                    Grid.Column="2" 
+                                    Text="Remove"
+                                    IsVisible="{Binding Count, Converter={StaticResource IntToBoolValueConverter}}">></Button>
                             </Grid>
                         </ViewCell>
 

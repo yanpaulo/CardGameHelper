@@ -23,9 +23,7 @@ namespace CardGameHelper.ViewModels
             DeckCards = Deck.Cards.ToList();
             CanPersist = canPersist;
         }
-
-        public Deck Deck { get; set; }
-
+        
         public bool CanPersist { get; set; }
 
         public string SearchText
@@ -33,6 +31,11 @@ namespace CardGameHelper.ViewModels
             get { return searchText; }
             set { searchText = value; OnPropertyChanged(); }
         }
+        
+        public bool CardsFound =>
+            DeckCards.Count > 0;
+
+        public Deck Deck { get; set; }
 
         public IList<DeckCard> DeckCards
         {
@@ -45,9 +48,7 @@ namespace CardGameHelper.ViewModels
             }
         }
 
-        public bool CardsFound => DeckCards.Count > 0;
-
-        public void DoSearch()
+        public void Search()
         {
             var searchText = SearchText ?? "";
             List<DeckCard> cards = new List<DeckCard>();
@@ -72,6 +73,13 @@ namespace CardGameHelper.ViewModels
             DeckCards = cards;
         }
 
+        public void AddCard(DeckCard deckCard)
+        {
+            deckCard.Count = 1;
+            Deck.Cards.Add(deckCard);
+            OnPropertyChanged(nameof(CardsFound));
+        }
+
         public async void CreateCard()
         {
             var card = new Card { Name = SearchText };
@@ -81,7 +89,7 @@ namespace CardGameHelper.ViewModels
 
             await context.AddCardAsync(card);
             
-            DoSearch();
+            Search();
         }
 
         public async Task SaveDeckAsync()

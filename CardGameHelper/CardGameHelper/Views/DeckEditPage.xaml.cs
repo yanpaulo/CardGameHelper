@@ -1,4 +1,5 @@
-﻿using CardGameHelper.ViewModels;
+﻿using CardGameHelper.Models;
+using CardGameHelper.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,14 +33,20 @@ namespace CardGameHelper.Views
             }
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void CreateCardButton_Clicked(object sender, EventArgs e)
         {
             viewModel.CreateCard();
         }
 
+        private void AddCardButton_Clicked(object sender, EventArgs e)
+        {
+            var deckCard = (sender as Element).BindingContext as DeckCard;
+            viewModel.AddCard(deckCard);
+        }
+
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            viewModel.DoSearch();
+            viewModel.Search();
         }
 
         private async void SaveToolbarItem_Click(object sender, EventArgs e)
