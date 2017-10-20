@@ -10,10 +10,12 @@ namespace CardGameHelper.ViewModels
 {
     public class DeckListViewModel : ObservableObject
     {
+        private CardAppContext context = CardAppContext.Instance;
+
         public DeckListViewModel()
         {
             Decks = new ObservableCollection<DeckListViewModelItem>();
-            var items = CardAppContext.Instance.Decks.Select(d => new DeckListViewModelItem { Deck = d });
+            var items = context.Decks.Select(d => new DeckListViewModelItem { Deck = d });
             foreach (var item in items)
             {
                 Decks.Add(item);
@@ -24,15 +26,16 @@ namespace CardGameHelper.ViewModels
 
         public void SelectDeck(DeckListViewModelItem deck)
         {
-            CardAppContext.Instance.SelectedDeck = deck.Deck.AsCopy();
+            context.SelectedDeck = deck.Deck.AsCopy();
             NotifyListChanges();
         }
 
 
-        public void RemoveDeck(DeckListViewModelItem deck)
+        public async Task RemoveDeckAsync(DeckListViewModelItem deck)
         {
             Decks.Remove(deck);
-            
+            await context.RemoveDeckAsync(deck.Deck);
+
             NotifyListChanges();
             OnPropertyChanged(nameof(CanRemoveDeck));
         }

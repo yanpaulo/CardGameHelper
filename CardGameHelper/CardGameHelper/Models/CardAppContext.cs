@@ -63,7 +63,7 @@ namespace CardGameHelper.Models
             await db.UpdateDeckAsync(deck);
         }
 
-        public async Task DeleteDeckAsync(Deck deck)
+        public async Task RemoveDeckAsync(Deck deck)
         {
             Decks.Remove(deck);
             if (SelectedDeck.Id == deck.Id)

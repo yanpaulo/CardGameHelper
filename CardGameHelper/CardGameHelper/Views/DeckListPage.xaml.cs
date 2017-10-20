@@ -46,11 +46,11 @@ namespace CardGameHelper.Views
             viewModel.SelectDeck(item);
         }
 
-        private void RemoveDeckButton_Clicked(object sender, EventArgs e)
+        private async void RemoveDeckButton_Clicked(object sender, EventArgs e)
         {
             var item =
                 (sender as Button).BindingContext as DeckListViewModelItem;
-            viewModel.RemoveDeck(item);
+            await viewModel.RemoveDeckAsync(item);
         }
 
         private async void CreateToolbarItem_Clicked(object sender, EventArgs e)
