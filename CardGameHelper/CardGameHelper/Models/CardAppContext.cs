@@ -62,5 +62,16 @@ namespace CardGameHelper.Models
 
             await db.UpdateDeckAsync(deck);
         }
+
+        public async Task DeleteDeckAsync(Deck deck)
+        {
+            Decks.Remove(deck);
+            if (SelectedDeck.Id == deck.Id)
+            {
+                SelectedDeck = Decks[0];
+            }
+
+            await db.DeleteDeckAsync(deck);
+        }
     }
 }

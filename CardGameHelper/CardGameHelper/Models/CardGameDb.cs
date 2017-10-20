@@ -60,7 +60,7 @@ namespace CardGameHelper.Models
             return decks;
 
         }
-        
+
         public async Task SaveDeckAsync(Deck deck)
         {
             await connection.InsertAsync(deck);
@@ -82,5 +82,10 @@ namespace CardGameHelper.Models
         }
 
 
+        public async Task DeleteDeckAsync(Deck deck)
+        {
+            await connection.ExecuteAsync($"DELETE FROM DeckCard WHERE DeckId={deck.Id}");
+            await connection.ExecuteAsync($"DELETE FROM Deck WHERE Id={deck.Id}");
+        }
     }
 }

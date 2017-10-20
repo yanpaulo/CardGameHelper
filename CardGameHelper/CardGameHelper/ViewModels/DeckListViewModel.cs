@@ -32,11 +32,7 @@ namespace CardGameHelper.ViewModels
         public void RemoveDeck(DeckListViewModelItem deck)
         {
             Decks.Remove(deck);
-            CardAppContext.Instance.Decks.Remove(deck.Deck);
-            if (deck.IsSelected)
-            {
-                CardAppContext.Instance.SelectedDeck = Decks[0].Deck;
-            }
+            
             NotifyListChanges();
             OnPropertyChanged(nameof(CanRemoveDeck));
         }
