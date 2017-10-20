@@ -40,8 +40,13 @@ namespace CardGameHelper.Views
 
         private void AddCardButton_Clicked(object sender, EventArgs e)
         {
-            var deckCard = (sender as Element).BindingContext as DeckCard;
+            var deckCard = (sender as Element).BindingContext as DeckEditViewModelItem;
             viewModel.AddCard(deckCard);
+        }
+
+        private void Stepper_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            viewModel.NotifyModelChange();
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
@@ -54,5 +59,7 @@ namespace CardGameHelper.Views
             await viewModel.SaveDeckAsync();
             await Navigation.PopAsync();
         }
+
+        
     }
 }

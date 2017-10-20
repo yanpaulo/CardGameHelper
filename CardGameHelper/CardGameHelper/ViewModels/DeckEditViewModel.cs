@@ -10,9 +10,8 @@ namespace CardGameHelper.ViewModels
     public class DeckEditViewModel : ObservableObject
     {
         private string searchText;
-        private IList<DeckCard> deckCards;
+        private IList<DeckEditViewModelItem> deckCards;
         private CardAppContext context = CardAppContext.Instance;
-        private CardGameDb db = CardGameDb.Instance;
 
         public DeckEditViewModel() : this(CardAppContext.Instance.SelectedDeck, false)
         { }
@@ -20,10 +19,11 @@ namespace CardGameHelper.ViewModels
         public DeckEditViewModel(Deck deck, bool canPersist)
         {
             Deck = deck;
-            DeckCards = Deck.Cards.ToList();
             CanPersist = canPersist;
+            Search();
+
         }
-        
+
         public bool CanPersist { get; set; }
 
         public string SearchText
@@ -31,13 +31,13 @@ namespace CardGameHelper.ViewModels
             get { return searchText; }
             set { searchText = value; OnPropertyChanged(); }
         }
-        
+
         public bool CardsFound =>
             DeckCards.Count > 0;
 
         public Deck Deck { get; set; }
 
-        public IList<DeckCard> DeckCards
+        public IList<DeckEditViewModelItem> DeckCards
         {
             get { return deckCards; }
             set
@@ -51,33 +51,40 @@ namespace CardGameHelper.ViewModels
         public void Search()
         {
             var searchText = SearchText ?? "";
-            List<DeckCard> cards = new List<DeckCard>();
+            var cards = new List<DeckEditViewModelItem>();
             var existing =
                 Deck.Cards
-                    .Where(c => c.Card.Name.ToLower().Contains(searchText.ToLower()));
+                    .Where(c => c.Card.Name.ToLower().Contains(searchText.ToLower()))
+                    .Select(dc => new DeckEditViewModelItem { Deck = Deck, DeckCard = dc });
 
             cards.AddRange(existing);
 
             if (!string.IsNullOrWhiteSpace(SearchText))
             {
-                var existingNames = cards.Select(c => c.Card.Name);
+                var existingNames = cards.Select(c => c.DeckCard.Card.Name).ToList();
 
                 var others =
                     context.Cards
                         .Where(c => !existingNames.Contains(c.Name) && c.Name.ToLower().Contains(searchText.ToLower()))
-                        .Select(c => new DeckCard { Card = c });
+                        .Select(dc =>
+                            new DeckEditViewModelItem
+                            {
+                                Deck = Deck,
+                                DeckCard = new DeckCard { Card = dc }
+                            });
 
-                cards.AddRange(others); 
+                cards.AddRange(others);
             }
 
             DeckCards = cards;
         }
 
-        public void AddCard(DeckCard deckCard)
+        public void AddCard(DeckEditViewModelItem model)
         {
+            var deckCard = model.DeckCard;
             deckCard.Count = 1;
             Deck.Cards.Add(deckCard);
-            OnPropertyChanged(nameof(CardsFound));
+            model.NotifyModelChanged();
         }
 
         public async void CreateCard()
@@ -88,13 +95,18 @@ namespace CardGameHelper.ViewModels
             Deck.Cards.Add(deckCard);
 
             await context.AddCardAsync(card);
-            
+
             Search();
         }
 
         public async Task SaveDeckAsync()
         {
             await context.UpdateDeckAsync(Deck);
+        }
+
+        public void NotifyModelChange()
+        {
+            Deck.NotifyModelChanged();
         }
     }
 }

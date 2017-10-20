@@ -40,25 +40,25 @@
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Text="{Binding Card.Name}"></Label>
+                                <Label Text="{Binding DeckCard.Card.Name}"></Label>
 
                                 <StackLayout 
                                     Grid.Column="1"
-                                    IsVisible="{Binding Count, Converter={StaticResource IntToBoolValueConverter}}">
-                                    <Label Text="{Binding Count}" HorizontalTextAlignment="Center"></Label>
-                                    <Stepper Value="{Binding Count}" Minimum="1" Increment="1"></Stepper>
+                                    IsVisible="{Binding IsOnDeck}">
+                                    <Label Text="{Binding DeckCard.Count}" HorizontalTextAlignment="Center"></Label>
+                                    <Stepper Value="{Binding DeckCard.Count}" Minimum="0" Increment="1" ValueChanged="Stepper_ValueChanged"></Stepper>
                                 </StackLayout>
 
                                 <Button 
                                     Grid.Column="1" 
                                     Text="Add"
                                     Clicked="AddCardButton_Clicked"
-                                    IsVisible="{Binding Count, Converter={StaticResource ReverseIntToBoolValueConverter}}"></Button>
+                                    IsVisible="{Binding IsOnDeck, Converter={StaticResource NegatedValueConverter}}"></Button>
 
                                 <Button 
                                     Grid.Column="2" 
                                     Text="Remove"
-                                    IsVisible="{Binding Count, Converter={StaticResource IntToBoolValueConverter}}">></Button>
+                                    IsVisible="{Binding IsOnDeck}">></Button>
                             </Grid>
                         </ViewCell>
 

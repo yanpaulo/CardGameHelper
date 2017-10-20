@@ -28,6 +28,10 @@ namespace CardGameHelper.Models
         [Ignore]
         public ObservableCollection<DeckCard> Cards { get; set; } = new ObservableCollection<DeckCard>();
 
+        public void NotifyModelChanged()
+        {
+            OnPropertyChanged(nameof(CardsCount));
+        }
 
         public Deck AsCopy() =>
             new Deck
