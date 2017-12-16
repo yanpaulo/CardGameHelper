@@ -1,4 +1,5 @@
-﻿using CardGameHelper.Views;
+﻿using CardGameHelper.Models;
+using CardGameHelper.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,12 @@ namespace CardGameHelper
         protected override void OnSleep()
         {
             // Handle when your app sleeps
+            var db = CardGameDb.Instance;
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                db.UpdateDeckAsync(CardAppContext.Instance.SelectedDeck).Wait();
+            }).Wait();
+
         }
 
         protected override void OnResume()

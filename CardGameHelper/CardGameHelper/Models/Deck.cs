@@ -21,6 +21,10 @@ namespace CardGameHelper.Models
 
         public string Name { get; set; } = "My Deck";
 
+        public bool IsSelected { get; set; }
+
+        public int? OriginalId { get; set; }
+
         [Ignore]
         public int CardsCount => 
             Cards.Sum(c => c.Count);
@@ -36,7 +40,7 @@ namespace CardGameHelper.Models
         public Deck AsCopy() =>
             new Deck
             {
-                Id = Id,
+                OriginalId = Id,
                 Name = Name,
                 Cards = new ObservableCollection<DeckCard>(Cards.Select(dc => new DeckCard { Card = dc.Card, Count = dc.Count }))
             };

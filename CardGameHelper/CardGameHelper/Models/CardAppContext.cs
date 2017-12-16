@@ -10,19 +10,21 @@ namespace CardGameHelper.Models
     public class CardAppContext : ObservableObject
     {
         private CardGameDb db = CardGameDb.Instance;
+        private Deck selectedDeck;
 
         private CardAppContext()
-        {   
+        {
+            IEnumerable<Deck> decks = null;
             Task.Run(() =>
             {
-                Decks = new ObservableCollection<Deck>(db.GetDecksAsync().Result);
+                decks = db.GetDecksAsync().Result;
                 Cards = new ObservableCollection<Card>(db.GetCardsAsync().Result);
             }).Wait();
 
-            SelectedDeck = Decks[0].AsCopy();
+            //MUST be set directly for initialization. DO NOT use setter.
+            selectedDeck = decks.Single(d => d.IsSelected);
+            Decks = new ObservableCollection<Deck>(decks.Except(new[] { SelectedDeck }));
         }
-
-        private Deck selectedDeck;
 
         public static CardAppContext Instance { get; private set; }
             = new CardAppContext();
@@ -30,14 +32,26 @@ namespace CardGameHelper.Models
         public Deck SelectedDeck
         {
             get { return selectedDeck; }
-            set { selectedDeck = value; OnPropertyChanged(); }
+            set
+            {
+                Task.Run(() =>
+                {
+                    var old = selectedDeck;
+                    
+                    selectedDeck = value;
+                    selectedDeck.IsSelected = true;
+                    db.DeleteDeckAsync(old).Wait();
+                    db.SaveDeckAsync(selectedDeck).Wait();
+
+                }).Wait();
+                OnPropertyChanged();
+            }
         }
 
         public ObservableCollection<Deck> Decks { get; set; }
 
         public ObservableCollection<Card> Cards { get; set; }
-
-
+        
         public async Task AddCardAsync(Card c)
         {
             Cards.Add(c);

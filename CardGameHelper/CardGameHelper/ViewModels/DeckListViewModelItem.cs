@@ -11,7 +11,7 @@ namespace CardGameHelper.ViewModels
     {
         public Deck Deck { get; set; }
 
-        public bool IsSelected => CardAppContext.Instance.SelectedDeck?.Id == Deck.Id;
+        public bool IsSelected => CardAppContext.Instance.SelectedDeck?.OriginalId == Deck.Id;
 
         public void NotifyModelChanged()
         {

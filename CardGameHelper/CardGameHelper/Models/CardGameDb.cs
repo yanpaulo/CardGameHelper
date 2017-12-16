@@ -17,7 +17,7 @@ namespace CardGameHelper.Models
         {
             get { return instance ?? (instance = new CardGameDb()); }
             set { instance = value; }
-        } 
+        }
         #endregion
 
         private SQLiteAsyncConnection connection;
@@ -26,13 +26,17 @@ namespace CardGameHelper.Models
         {
             connection = new SQLiteAsyncConnection(DependencyService.Get<IPathService>().GetLocalPath("CardGame.db"));
             connection.CreateTablesAsync<Card, Deck, DeckCard>().Wait();
-            if(connection.Table<Deck>().CountAsync().Result == 0)
+            if (connection.Table<Deck>().CountAsync().Result == 0)
             {
-                connection.InsertAsync(new Deck());
+                var deck = new Deck();
+                connection.InsertAsync(deck);
+                deck = deck.AsCopy();
+                deck.IsSelected = true;
+                connection.InsertAsync(deck);
             }
         }
 
-        
+
         public async Task<int> AddCardAsync(Card card)
         {
             return await connection.InsertAsync(card);
