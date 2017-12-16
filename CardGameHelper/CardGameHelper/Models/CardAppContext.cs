@@ -69,7 +69,7 @@ namespace CardGameHelper.Models
             var old = Decks.Single(d => d.Id == deck.Id);
             Decks[Decks.IndexOf(old)] = deck;
 
-            if (old.Id == SelectedDeck.Id)
+            if (old.Id == SelectedDeck.OriginalId)
             {
                 SelectedDeck = deck.AsCopy();
             }

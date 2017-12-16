@@ -40,6 +40,7 @@ namespace CardGameHelper.Models
         public Deck AsCopy() =>
             new Deck
             {
+                Id = Id,
                 OriginalId = Id,
                 Name = Name,
                 Cards = new ObservableCollection<DeckCard>(Cards.Select(dc => new DeckCard { Card = dc.Card, Count = dc.Count }))
