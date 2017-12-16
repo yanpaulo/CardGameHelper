@@ -24,7 +24,7 @@
           <Label
               Grid.Column="1"
               Grid.Row="2"
-              Text="AppName"
+              Text="Gwent Helper"
               Style="{DynamicResource SubtitleStyle}"/>
         </Grid>
       </ListView.Header>
