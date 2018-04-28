@@ -74,9 +74,9 @@ namespace CardGameHelper.Models
         public void RemoveDeck(Deck deck)
         {
             Decks.Remove(deck);
-            if (SelectedDeck.Id == deck.Id)
+            if (SelectedDeck.OriginalId == deck.Id)
             {
-                SelectedDeck = Decks[0];
+                SelectedDeck = Decks[0].AsCopy();
             }
 
             db.DeleteDeck(deck);
