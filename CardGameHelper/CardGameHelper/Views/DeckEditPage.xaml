@@ -30,7 +30,7 @@
                     Clicked="CreateCardButton_Clicked" Text="Create"></Button>
             </Grid>
 
-            <ListView Grid.Row="1" ItemsSource="{Binding DeckCards}">
+            <ListView Grid.Row="1" HasUnevenRows="True" ItemsSource="{Binding DeckCards}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
