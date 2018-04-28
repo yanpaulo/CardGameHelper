@@ -1,11 +1,11 @@
 ﻿using CardGameHelper.DependencyServices;
+using CardGameHelper.UWP;
 using System.IO;
-using Todo.UWP;
 using Windows.Storage;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileHelper))]
-namespace Todo.UWP
+namespace CardGameHelper.UWP
 {
     public class FileHelper : IPathService
     {

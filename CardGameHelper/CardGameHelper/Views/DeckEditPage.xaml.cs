@@ -27,7 +27,7 @@ namespace CardGameHelper.Views
             BindingContext = this.viewModel = viewModel;
             if (viewModel.CanPersist)
             {
-                var toolbarItem = new ToolbarItem() { Text = "Save" };
+                var toolbarItem = new ToolbarItem() { Text = "Save", Icon = "icon_save.png" };
                 toolbarItem.Clicked += SaveToolbarItem_Click;
                 ToolbarItems.Add(toolbarItem);
             }
@@ -42,6 +42,13 @@ namespace CardGameHelper.Views
         {
             var deckCard = (sender as Element).BindingContext as DeckEditViewModelItem;
             viewModel.AddCard(deckCard);
+        }
+
+
+        private void RemoveCardButton_Clicked(object sender, EventArgs e)
+        {
+            var deckCard = (sender as Element).BindingContext as DeckEditViewModelItem;
+            viewModel.RemoveCard(deckCard);
         }
 
         private void Stepper_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -60,6 +67,5 @@ namespace CardGameHelper.Views
             await Navigation.PopAsync();
         }
 
-        
     }
 }

@@ -11,6 +11,6 @@
         </StackLayout>
     </ContentPage.Content>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Clicked="SaveToolbarItem_Clicked"></ToolbarItem>
+        <ToolbarItem Text="Save" Clicked="SaveToolbarItem_Clicked" Icon="icon_save.png"></ToolbarItem>
     </ContentPage.ToolbarItems>
 </ContentPage>

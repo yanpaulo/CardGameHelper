@@ -23,12 +23,18 @@
                             Text="{Binding Deck.Name}"></Label>
 
                         <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="8">
-                            <Label VerticalTextAlignment="Center" IsVisible="{Binding IsSelected}">Selected</Label>
                             <Button 
+                                Image="icon_selected.png"
+                                Text="Selected"
+                                IsVisible="{Binding IsSelected}"
+                                IsEnabled="False"></Button>
+                            <Button 
+                                Image="icon_select.png"
                                 Text="Select"
                                 IsVisible="{Binding IsSelected, Converter={StaticResource NegatedValueConverter}}"
                                 Clicked="SelectDeckButton_Clicked"></Button>
                             <Button 
+                                Image="icon_remove.png"
                                 Text="Remove"
                                 IsEnabled="{Binding Path=BindingContext.CanRemoveDeck,Source={x:Reference Root}}"
                                 Clicked="RemoveDeckButton_Clicked"></Button>
@@ -40,6 +46,6 @@
 
     </ListView>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Create" Clicked="CreateToolbarItem_Clicked"></ToolbarItem>
+        <ToolbarItem Text="Create" Icon="icon_add.png" Clicked="CreateToolbarItem_Clicked"></ToolbarItem>
     </ContentPage.ToolbarItems>
 </ContentPage>

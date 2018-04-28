@@ -109,6 +109,12 @@
     <None Include="CardGameHelper.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon_add.png" />
+    <Content Include="icon_add_black.png" />
+    <Content Include="icon_remove.png" />
+    <Content Include="icon_save.png" />
+    <Content Include="icon_select.png" />
+    <Content Include="icon_selected.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
     <Content Include="Assets\LockScreenLogo.scale-125.png" />

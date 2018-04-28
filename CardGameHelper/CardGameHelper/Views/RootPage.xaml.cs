@@ -30,8 +30,6 @@ namespace CardGameHelper.Views
 
             Detail = new NavigationPage(page);
             IsPresented = false;
-
-            //MasterPage.ListView.SelectedItem = null;
         }
     }
 }

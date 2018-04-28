@@ -78,12 +78,19 @@ namespace CardGameHelper.ViewModels
 
             DeckCards = cards;
         }
-
+        
         public void AddCard(DeckEditViewModelItem model)
         {
             var deckCard = model.DeckCard;
             deckCard.Count = 1;
             Deck.Cards.Add(deckCard);
+            model.NotifyModelChanged();
+        }
+
+        public void RemoveCard(DeckEditViewModelItem model)
+        {
+            var deckCard = model.DeckCard;
+            Deck.Cards.Remove(deckCard);
             model.NotifyModelChanged();
         }
 
