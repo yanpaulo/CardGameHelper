@@ -100,10 +100,9 @@ namespace CardGameHelper.ViewModels
             var deckCard = new DeckCard { Card = card, Count = 1 };
 
             Deck.Cards.Add(deckCard);
-
             context.AddCard(card);
 
-            Search();
+            SearchText = null;
         }
 
         public void SaveDeck()
