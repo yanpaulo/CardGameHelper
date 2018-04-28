@@ -26,12 +26,7 @@ namespace CardGameHelper
         protected override void OnSleep()
         {
             // Handle when your app sleeps
-            var db = CardGameDb.Instance;
-            System.Threading.Tasks.Task.Run(() =>
-            {
-                db.UpdateDeckAsync(CardAppContext.Instance.SelectedDeck).Wait();
-            }).Wait();
-
+            CardGameDb.Instance.UpdateDeck(CardAppContext.Instance.SelectedDeck);
         }
 
         protected override void OnResume()

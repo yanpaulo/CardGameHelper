@@ -18,11 +18,11 @@ namespace CardGameHelper.Views
             InitializeComponent();
         }
 
-        private async void SaveToolbarItem_Clicked(object sender, EventArgs e)
+        private void SaveToolbarItem_Clicked(object sender, EventArgs e)
         {
             var deck = new Deck { Name = NameTextBox.Text };
-            await CardAppContext.Instance.AddDeckAsync(deck);
-            await Navigation.PopAsync();
+            CardAppContext.Instance.AddDeck(deck);
+            Navigation.PopAsync();
         }
     }
 }

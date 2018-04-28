@@ -94,21 +94,21 @@ namespace CardGameHelper.ViewModels
             model.NotifyModelChanged();
         }
 
-        public async void CreateCard()
+        public void CreateCard()
         {
             var card = new Card { Name = SearchText };
             var deckCard = new DeckCard { Card = card, Count = 1 };
 
             Deck.Cards.Add(deckCard);
 
-            await context.AddCardAsync(card);
+            context.AddCard(card);
 
             Search();
         }
 
-        public async Task SaveDeckAsync()
+        public void SaveDeck()
         {
-            await context.UpdateDeckAsync(Deck);
+            context.UpdateDeck(Deck);
         }
 
         public void NotifyModelChange()

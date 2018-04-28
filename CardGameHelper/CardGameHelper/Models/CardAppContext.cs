@@ -15,11 +15,8 @@ namespace CardGameHelper.Models
         private CardAppContext()
         {
             IEnumerable<Deck> decks = null;
-            Task.Run(() =>
-            {
-                decks = db.GetDecksAsync().Result;
-                Cards = new ObservableCollection<Card>(db.GetCardsAsync().Result);
-            }).Wait();
+            decks = db.GetDecks();
+            Cards = new ObservableCollection<Card>(db.GetCards());
 
             //MUST be set directly for initialization. DO NOT use setter.
             selectedDeck = decks.Single(d => d.IsSelected);
@@ -34,16 +31,13 @@ namespace CardGameHelper.Models
             get { return selectedDeck; }
             set
             {
-                Task.Run(() =>
-                {
-                    var old = selectedDeck;
-                    
-                    selectedDeck = value;
-                    selectedDeck.IsSelected = true;
-                    db.DeleteDeckAsync(old).Wait();
-                    db.SaveDeckAsync(selectedDeck).Wait();
+                var old = selectedDeck;
 
-                }).Wait();
+                selectedDeck = value;
+                selectedDeck.IsSelected = true;
+                db.DeleteDeck(old);
+                db.SaveDeck(selectedDeck);
+
                 OnPropertyChanged();
             }
         }
@@ -51,20 +45,20 @@ namespace CardGameHelper.Models
         public ObservableCollection<Deck> Decks { get; set; }
 
         public ObservableCollection<Card> Cards { get; set; }
-        
-        public async Task AddCardAsync(Card c)
+
+        public void AddCard(Card c)
         {
             Cards.Add(c);
-            await db.AddCardAsync(c);
+            db.AddCard(c);
         }
 
-        public async Task AddDeckAsync(Deck deck)
+        public void AddDeck(Deck deck)
         {
-            await db.SaveDeckAsync(deck);
+            db.SaveDeck(deck);
             Decks.Add(deck);
         }
 
-        public async Task UpdateDeckAsync(Deck deck)
+        public void UpdateDeck(Deck deck)
         {
             var old = Decks.Single(d => d.Id == deck.Id);
             Decks[Decks.IndexOf(old)] = deck;
@@ -74,10 +68,10 @@ namespace CardGameHelper.Models
                 SelectedDeck = deck.AsCopy();
             }
 
-            await db.UpdateDeckAsync(deck);
+            db.UpdateDeck(deck);
         }
 
-        public async Task RemoveDeckAsync(Deck deck)
+        public void RemoveDeck(Deck deck)
         {
             Decks.Remove(deck);
             if (SelectedDeck.Id == deck.Id)
@@ -85,7 +79,7 @@ namespace CardGameHelper.Models
                 SelectedDeck = Decks[0];
             }
 
-            await db.DeleteDeckAsync(deck);
+            db.DeleteDeck(deck);
         }
     }
 }

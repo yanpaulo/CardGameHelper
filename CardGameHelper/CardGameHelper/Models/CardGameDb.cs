@@ -20,38 +20,38 @@ namespace CardGameHelper.Models
         }
         #endregion
 
-        private SQLiteAsyncConnection connection;
+        private SQLiteConnection connection;
 
         private CardGameDb()
         {
-            connection = new SQLiteAsyncConnection(DependencyService.Get<IPathService>().GetLocalPath("CardGame.db"));
-            connection.CreateTablesAsync<Card, Deck, DeckCard>().Wait();
-            if (connection.Table<Deck>().CountAsync().Result == 0)
+            connection = new SQLiteConnection(DependencyService.Get<IPathService>().GetLocalPath("CardGame.db"));
+            connection.CreateTables<Card, Deck, DeckCard>();
+            if (connection.Table<Deck>().Count() == 0)
             {
                 var deck = new Deck();
-                connection.InsertAsync(deck);
+                connection.Insert(deck);
                 deck = deck.AsCopy();
                 deck.IsSelected = true;
-                connection.InsertAsync(deck);
+                connection.Insert(deck);
             }
         }
 
 
-        public async Task<int> AddCardAsync(Card card)
+        public int AddCard(Card card)
         {
-            return await connection.InsertAsync(card);
+            return connection.Insert(card);
         }
 
-        public async Task<IEnumerable<Card>> GetCardsAsync()
+        public IEnumerable<Card> GetCards()
         {
-            return await connection.Table<Card>().ToListAsync();
+            return connection.Table<Card>().ToList();
         }
 
-        public async Task<IEnumerable<Deck>> GetDecksAsync()
+        public  IEnumerable<Deck> GetDecks()
         {
-            var decks = await connection.Table<Deck>().ToListAsync();
-            var cards = await GetCardsAsync();
-            var deckCards = await connection.Table<DeckCard>().ToListAsync();
+            var decks = connection.Table<Deck>().ToList();
+            var cards = GetCards();
+            var deckCards = connection.Table<DeckCard>().ToList();
             foreach (var dc in deckCards)
             {
                 dc.Card = cards.Single(c => c.Id == dc.CardId);
@@ -65,31 +65,31 @@ namespace CardGameHelper.Models
 
         }
 
-        public async Task SaveDeckAsync(Deck deck)
+        public  void SaveDeck(Deck deck)
         {
-            await connection.InsertAsync(deck);
+            connection.Insert(deck);
         }
 
-        public async Task UpdateDeckAsync(Deck deck)
+        public  void UpdateDeck(Deck deck)
         {
-            await connection.ExecuteAsync($"DELETE FROM DeckCard WHERE DeckId={deck.Id}");
+            connection.Execute($"DELETE FROM DeckCard WHERE DeckId={deck.Id}");
             foreach (var deckCard in deck.Cards)
             {
                 if (deckCard.Card.Id == 0)
                 {
-                    await connection.InsertAsync(deckCard);
+                    connection.Insert(deckCard);
                 }
                 deckCard.DeckId = deck.Id;
                 deckCard.CardId = deckCard.Card.Id;
             }
-            await connection.InsertAllAsync(deck.Cards);
+            connection.InsertAll(deck.Cards);
         }
 
 
-        public async Task DeleteDeckAsync(Deck deck)
+        public  void DeleteDeck(Deck deck)
         {
-            await connection.ExecuteAsync($"DELETE FROM DeckCard WHERE DeckId={deck.Id}");
-            await connection.ExecuteAsync($"DELETE FROM Deck WHERE Id={deck.Id}");
+            connection.Execute($"DELETE FROM DeckCard WHERE DeckId={deck.Id}");
+            connection.Execute($"DELETE FROM Deck WHERE Id={deck.Id}");
         }
     }
 }

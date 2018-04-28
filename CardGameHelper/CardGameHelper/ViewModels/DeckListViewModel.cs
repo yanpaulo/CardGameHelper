@@ -31,10 +31,10 @@ namespace CardGameHelper.ViewModels
         }
 
 
-        public async Task RemoveDeckAsync(DeckListViewModelItem deck)
+        public void RemoveDeck(DeckListViewModelItem deck)
         {
             Decks.Remove(deck);
-            await context.RemoveDeckAsync(deck.Deck);
+            context.RemoveDeck(deck.Deck);
 
             NotifyListChanges();
             OnPropertyChanged(nameof(CanRemoveDeck));

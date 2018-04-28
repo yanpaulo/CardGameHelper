@@ -63,7 +63,7 @@ namespace CardGameHelper.Views
 
         private async void SaveToolbarItem_Click(object sender, EventArgs e)
         {
-            await viewModel.SaveDeckAsync();
+            viewModel.SaveDeck();
             await Navigation.PopAsync();
         }
 
