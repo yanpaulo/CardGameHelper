@@ -16,5 +16,10 @@ namespace CardGameHelper.Views
         {
             InitializeComponent();
         }
+
+        private async void TutorialButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new IntroPage());
+        }
     }
 }

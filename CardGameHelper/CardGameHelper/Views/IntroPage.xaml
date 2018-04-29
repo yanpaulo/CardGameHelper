@@ -9,16 +9,16 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Text="How to use this app" Margin="0,4"></Label>
+            <Label Text="How to use this app" Margin="0,4" Style="{DynamicResource  TitleStyle}"></Label>
             
             <ScrollView Grid.Row="1">
                 <StackLayout>
-                    <Label Text="In this app you can mainly do two things: Manage decks or track a match."></Label>
+                    <Label Text="In this app you can mainly do two things: Manage decks or Track a match."></Label>
                     <Label Text="In order to track a match, you first need to properly build your your deck on the Decks screen."></Label>
                     <Image Source="intro1.png"></Image>
                     <Label Text="In the Decks screen you can (1) Create a deck, (2) Edit a deck, (3) Select a deck or (4) Delete a deck."></Label>
                     <Image Source="intro2.png"></Image>
-                    <Label Text="Tapping on a Deck name (2) will open the Edit Deck screen. There you can add or remove cards as much as you like."></Label>
+                    <Label Text="Tapping on a Deck name (2 as shown above) will open the Edit Deck screen. There you can add or remove cards as much as you like."></Label>
                     <Label Text="To add a card, search for its name in the Search Box (5) and then click in the Add Button (6) next to the card's name."></Label>
                     <Label Text="You may also want to remove a card from the deck and to do so, click on the Remove Button (7) right to the card's name."></Label>
                     <Image Source="intro3.png"></Image>
@@ -26,19 +26,19 @@
                     <Image Source="intro4.png"></Image>
                     <Label Text="Clicking this button will create a new Card with the searched Name and add it to the Deck. This card will also be available to be added in another Decks as well, so no need to create it anymore. =)"></Label>
                     <Image Source="intro5.png"></Image>
-                    <Label Text="After creating your Deck, click on the Save button to save your Deck or press the Back button to go back without editing your Deck."></Label>
+                    <Label Text="After creating your Deck, click on the Save Button (9) to save your Deck or press the Back button to go back without editing your Deck."></Label>
                     <Image Source="intro6.png"></Image>
-                    <Label Text="If you have multiple Decks, click the Select Button so that you can track matches using that Deck."></Label>
+                    <Label Text="If you have multiple Decks, click the Select Button (3) so that you can track matches using that Deck."></Label>
                     <Image Source="intro7.png"></Image>
-                    <Label Text="With a Deck ready and Selected, you can go to the Main screen and track matches using that Deck (9)."></Label>
+                    <Label Text="With a Deck ready and Selected, you can go to the Main Screen (11) and track matches using that Deck."></Label>
                     <Label Text="The Main screen works just like the Deck Edit screen, except that changes made there won't affect your Deck."></Label>
                     <Label Text="You can see it as if it was a copy of your selected Deck, so go on and track your matches using the Main Screen. =)"></Label>
                     <Image Source="intro8.png"></Image>
-                    <Label Text="If you want to reset the Deck to its original state, press the Reset Button(10). This button is also available in the Deck Edit screen."></Label>
+                    <Label Text="If you want to reset the Deck to its original state, press the Reset Button(12) shown above. This button is also available in the Deck Edit screen."></Label>
                 </StackLayout>
             </ScrollView>
 
-            <Button Grid.Row="2" Margin="0,4" HorizontalOptions="End" Text="Ok" Clicked="OkButton_Clicked"></Button>
+            <Button Grid.Row="2" Margin="0,4" Text="Ok, proceed!" Clicked="OkButton_Clicked"></Button>
         </Grid>
        
         
