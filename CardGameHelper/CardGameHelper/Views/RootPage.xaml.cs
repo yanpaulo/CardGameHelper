@@ -17,6 +17,12 @@ namespace CardGameHelper.Views
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+
+            if (!App.Current.Properties.ContainsKey("FirstUse"))
+            {
+                App.Current.Properties.Add("FirstUse", false);
+                Navigation.PushModalAsync(new IntroPage());
+            }
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
