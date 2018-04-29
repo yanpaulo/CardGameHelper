@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CardGameHelper.Views.DeckEditPage"
-             xmlns:vm="clr-namespace:CardGameHelper.ViewModels">
+             xmlns:vm="clr-namespace:CardGameHelper.ViewModels"
+             Title="{Binding Deck.Name}"
+             Appearing="DeckEditPage_Appearing">
     <ContentView.BindingContext>
         <vm:DeckEditViewModel></vm:DeckEditViewModel>
     </ContentView.BindingContext>
@@ -56,12 +58,12 @@
                                     Text="Add"
                                     Clicked="AddCardButton_Clicked"
                                     IsVisible="{Binding IsOnDeck, Converter={StaticResource NegatedValueConverter}}"></Button>
-                                
+
                                 <StackLayout Grid.Column="2" VerticalOptions="Center">
                                     <Button 
                                     Image="icon_remove.png"
                                     Text="Remove"
-                                        Clicked="RemoveCardButton_Clicked"
+                                    Clicked="RemoveCardButton_Clicked"
                                     IsVisible="{Binding IsOnDeck}">></Button>
                                 </StackLayout>
                             </Grid>

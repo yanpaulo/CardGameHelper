@@ -64,9 +64,21 @@ namespace CardGameHelper.Models
             return decks;
 
         }
-
-        public  void SaveDeck(Deck deck)
+        
+        public void SaveDeck(Deck deck)
         {
+            connection.Insert(deck);
+        }
+
+        public void SaveSelectedDeck(Deck deck)
+        {
+            var selected = connection.Table<Deck>().Where(d => d.IsSelected);
+            foreach (var item in selected)
+            {
+                connection.Delete(item);
+            }
+
+            deck.IsSelected = true;
             connection.Insert(deck);
         }
 

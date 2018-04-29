@@ -25,7 +25,7 @@ namespace CardGameHelper.Views
         {
             InitializeComponent();
             BindingContext = this.viewModel = viewModel;
-            if (viewModel.CanPersist)
+            if (viewModel.EditMode)
             {
                 var toolbarItem = new ToolbarItem() { Text = "Save", Icon = "icon_save.png" };
                 toolbarItem.Clicked += SaveToolbarItem_Click;
@@ -67,5 +67,22 @@ namespace CardGameHelper.Views
             await Navigation.PopAsync();
         }
 
+        private async void DeckEditPage_Appearing(object sender, EventArgs e)
+        {
+            if (!viewModel.EditMode)
+            {
+                viewModel.Deck = CardAppContext.Instance.SelectedDeck;
+
+                if (!viewModel.DeckCards.Any())
+                {
+                    var response = await DisplayAlert("Tip", "There are no cards on this deck. Would you like to go to the Edit page and add some cards?", "Yes", "No");
+                    if (response)
+                    {
+                        await Navigation.PushAsync(new DeckEditPage(viewModel.AsOriginalCopy()));
+                    } 
+                }
+                
+            }
+        }
     }
 }

@@ -29,15 +29,8 @@ namespace CardGameHelper.Models
             get { return selectedDeck; }
             set
             {
-                var old = selectedDeck;
-                if (old != null)
-                {
-                    db.DeleteDeck(old);
-                }
-
                 selectedDeck = value;
-                selectedDeck.IsSelected = true;
-                db.SaveDeck(selectedDeck);
+                db.SaveSelectedDeck(selectedDeck);
 
                 OnPropertyChanged();
             }

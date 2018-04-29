@@ -12,19 +12,18 @@ namespace CardGameHelper.ViewModels
         private string searchText;
         private IList<DeckEditViewModelItem> deckCards;
         private CardAppContext context = CardAppContext.Instance;
+        private Deck _deck;
 
         public DeckEditViewModel() : this(CardAppContext.Instance.SelectedDeck, false)
         { }
 
-        public DeckEditViewModel(Deck deck, bool canPersist)
+        public DeckEditViewModel(Deck deck, bool editMode)
         {
+            EditMode = editMode;
             Deck = deck;
-            CanPersist = canPersist;
-            Search();
-
         }
 
-        public bool CanPersist { get; set; }
+        public bool EditMode { get; set; }
 
         public string SearchText
         {
@@ -35,7 +34,17 @@ namespace CardGameHelper.ViewModels
         public bool CardsFound =>
             DeckCards.Count > 0;
 
-        public Deck Deck { get; set; }
+        public Deck Deck
+        {
+            get => _deck;
+            set
+            {
+                _deck = value;
+                Search();
+
+                OnPropertyChanged();
+            }
+        }
 
         public IList<DeckEditViewModelItem> DeckCards
         {
@@ -78,7 +87,7 @@ namespace CardGameHelper.ViewModels
 
             DeckCards = cards;
         }
-        
+
         public void AddCard(DeckEditViewModelItem model)
         {
             var deckCard = model.DeckCard;
@@ -107,12 +116,20 @@ namespace CardGameHelper.ViewModels
 
         public void SaveDeck()
         {
+            Deck.Id = Deck.OriginalId.Value;
             context.UpdateDeck(Deck);
         }
 
         public void NotifyModelChange()
         {
             Deck.NotifyModelChanged();
+        }
+
+        public DeckEditViewModel AsOriginalCopy()
+        {
+            var deck = CardGameDb.Instance.GetDecks().Single(d => d.Id == Deck.OriginalId);
+            var vm = new DeckEditViewModel(deck.AsCopy(), true);
+            return vm;
         }
     }
 }

@@ -9,7 +9,7 @@
     <MasterDetailPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <pages:DeckEditPage Title="Main" />
+                <pages:DeckEditPage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>
