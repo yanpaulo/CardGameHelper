@@ -32,7 +32,7 @@ namespace CardGameHelper.Views
                 = new ObservableCollection<RootPageMenuItem>(new[]
                     {
                         new RootPageMenuItem { Title = "Main", TargetType = typeof(DeckEditPage) },
-                        new RootPageMenuItem { Title = "My Decks", TargetType = typeof(DeckListPage) },
+                        new RootPageMenuItem { Title = "Decks", TargetType = typeof(DeckListPage) },
                         new RootPageMenuItem { Title = "About", TargetType = typeof(AboutPage) },
                     });
         }

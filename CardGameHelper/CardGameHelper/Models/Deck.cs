@@ -19,7 +19,7 @@ namespace CardGameHelper.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        public string Name { get; set; } = "My Deck";
+        public string Name { get; set; } = "Starter Deck";
 
         public bool IsSelected { get; set; }
 
