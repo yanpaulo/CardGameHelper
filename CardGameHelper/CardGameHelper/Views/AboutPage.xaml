@@ -4,8 +4,10 @@
              x:Class="CardGameHelper.Views.AboutPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="This f*cking cool app was developed by YansCorp and Machado 98." />
-            <Label Text="Your sould belongs to us! Hohohoho" />
+            <Label Text="This is an app developed to help players to track their matchers in the wonderful Gowne card game." />
+            <Label Text="It is an independant app and so it or doesn't have anything to do with Gwent's developer or publisher." />
+            <Label Text="Hope you enjoy this app =)"></Label>
+            <Label Text="Cheers."></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

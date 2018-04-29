@@ -24,6 +24,7 @@
 
                 <SearchBar 
                     Text="{Binding SearchText}"
+                    Placeholder="Search or create cards"
                     TextChanged="SearchBar_TextChanged"></SearchBar>
                 <Button 
                     Grid.Column="1" 

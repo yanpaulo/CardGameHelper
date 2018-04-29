@@ -25,7 +25,7 @@
                     <Label
                       Grid.Column="1"
                       Grid.Row="2"
-                      Text="Gwent Helper"
+                      Text="Tracker for Gwent"
                       TextColor="White"
                         HorizontalTextAlignment="Center"
                       Style="{DynamicResource SubtitleStyle}"/>
