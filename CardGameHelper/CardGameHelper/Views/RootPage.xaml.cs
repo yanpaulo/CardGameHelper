@@ -27,6 +27,7 @@ namespace CardGameHelper.Views
 
             var page = (Page)Activator.CreateInstance(item.TargetType);
             page.Title = page.Title ?? item.Title;
+            page.Padding = 8;
 
             Detail = new NavigationPage(page);
             IsPresented = false;

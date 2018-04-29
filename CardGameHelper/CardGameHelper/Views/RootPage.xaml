@@ -9,7 +9,7 @@
     <MasterDetailPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <pages:DeckEditPage />
+                <pages:DeckEditPage Padding="8" />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>
