@@ -21,12 +21,14 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="10"/>
                     </Grid.RowDefinitions>
+                    <Image Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" Source="gwent_logo.png"></Image>
                     <Label
-              Grid.Column="1"
-              Grid.Row="2"
-              Text="Gwent Helper"
-              TextColor="White"
-              Style="{DynamicResource SubtitleStyle}"/>
+                      Grid.Column="1"
+                      Grid.Row="2"
+                      Text="Gwent Helper"
+                      TextColor="White"
+                        HorizontalTextAlignment="Center"
+                      Style="{DynamicResource SubtitleStyle}"/>
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>

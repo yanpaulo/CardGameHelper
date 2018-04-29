@@ -109,6 +109,7 @@
     <None Include="CardGameHelper.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="gwent_logo.png" />
     <Content Include="icon_add.png" />
     <Content Include="icon_add_black.png" />
     <Content Include="icon_refresh.png" />
