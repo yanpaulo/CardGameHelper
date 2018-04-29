@@ -117,6 +117,14 @@
     <Content Include="icon_save.png" />
     <Content Include="icon_select.png" />
     <Content Include="icon_selected.png" />
+    <Content Include="intro1.png" />
+    <Content Include="intro2.png" />
+    <Content Include="intro3.png" />
+    <Content Include="intro4.png" />
+    <Content Include="intro5.png" />
+    <Content Include="intro6.png" />
+    <Content Include="intro7.png" />
+    <Content Include="intro8.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
     <Content Include="Assets\LockScreenLogo.scale-125.png" />
