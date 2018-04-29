@@ -42,7 +42,8 @@ namespace CardGameHelper.Models
             {
                 OriginalId = Id,
                 Name = Name,
-                Cards = new ObservableCollection<DeckCard>(Cards.Select(dc => new DeckCard { Card = dc.Card, Count = dc.Count }))
+                Cards = new ObservableCollection<DeckCard>(Cards.Select(dc => new DeckCard { Card = dc.Card, Count = dc.Count })),
+                IsSelected = IsSelected
             };
 
         private void Card_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

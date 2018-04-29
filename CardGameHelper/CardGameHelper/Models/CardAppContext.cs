@@ -76,9 +76,15 @@ namespace CardGameHelper.Models
             Decks.Remove(deck);
         }
 
-        public Deck ResetSelectedDeck()
+        public Deck ResetDeck(Deck deck)
         {
-            return SelectedDeck = Decks.Single(d => d.Id == SelectedDeck.OriginalId).AsCopy();
+            var result = Decks.Single(d => d.Id == deck.OriginalId).AsCopy();
+            if (deck.IsSelected)
+            {
+                SelectedDeck = result;
+            }
+
+            return result;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace CardGameHelper.Views
 
             var item = e.Item as DeckListViewModelItem;
 
-            var editViewModel = new DeckEditViewModel(item.Deck.AsCopy(), true);
+            var editViewModel = viewModel.EditViewModel(item);
             await Navigation.PushAsync(new DeckEditPage(editViewModel));
 
             //Deselect Item

@@ -30,7 +30,6 @@ namespace CardGameHelper.ViewModels
             NotifyListChanges();
         }
 
-
         public void RemoveDeck(DeckListViewModelItem deck)
         {
             Decks.Remove(deck);
@@ -41,6 +40,9 @@ namespace CardGameHelper.ViewModels
         }
 
         public bool CanRemoveDeck => Decks.Count > 1;
+
+        public DeckEditViewModel EditViewModel(DeckListViewModelItem item) =>
+            new DeckEditViewModel(item.Deck.AsCopy(), true);
 
         private void NotifyListChanges()
         {

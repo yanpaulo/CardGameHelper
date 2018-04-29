@@ -90,14 +90,7 @@ namespace CardGameHelper.ViewModels
 
         public void Reset()
         {
-            if (EditMode)
-            {
-                Deck = context.Decks.Single(d => d.Id == Deck.OriginalId).AsCopy();
-            }
-            else
-            {
-                Deck = context.ResetSelectedDeck(); 
-            }
+            Deck = context.ResetDeck(Deck);
         }
 
         public void AddCard(DeckEditViewModelItem model)
