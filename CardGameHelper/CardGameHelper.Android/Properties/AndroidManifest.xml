@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.CardGameHelper">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="0.1" package="com.yanscorp.CardGameHelper" android:installLocation="auto" android:versionCode="1">
 	<uses-sdk android:minSdkVersion="15" />
-	<application android:label="CardGameHelper.Android"></application>
+	<application android:label="Tracker for Gwent" android:icon="@drawable/gwent_mini"></application>
 </manifest>
