@@ -75,10 +75,6 @@ namespace CardGameHelper.Models
             connection.Execute($"DELETE FROM DeckCard WHERE DeckId={deck.Id}");
             foreach (var deckCard in deck.Cards)
             {
-                if (deckCard.Card.Id == 0)
-                {
-                    connection.Insert(deckCard);
-                }
                 deckCard.DeckId = deck.Id;
                 deckCard.CardId = deckCard.Card.Id;
             }

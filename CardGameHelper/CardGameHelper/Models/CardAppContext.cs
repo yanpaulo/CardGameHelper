@@ -14,12 +14,10 @@ namespace CardGameHelper.Models
 
         private CardAppContext()
         {
-            IEnumerable<Deck> decks = null;
-            decks = db.GetDecks();
-            Cards = new ObservableCollection<Card>(db.GetCards());
+            var decks = db.GetDecks();
 
-            //MUST be set directly for initialization. DO NOT use setter.
-            selectedDeck = decks.Single(d => d.IsSelected);
+            Cards = new ObservableCollection<Card>(db.GetCards());
+            SelectedDeck = decks.Single(d => d.IsSelected);
             Decks = new ObservableCollection<Deck>(decks.Except(new[] { SelectedDeck }));
         }
 
@@ -32,10 +30,13 @@ namespace CardGameHelper.Models
             set
             {
                 var old = selectedDeck;
+                if (old != null)
+                {
+                    db.DeleteDeck(old);
+                }
 
                 selectedDeck = value;
                 selectedDeck.IsSelected = true;
-                db.DeleteDeck(old);
                 db.SaveDeck(selectedDeck);
 
                 OnPropertyChanged();
@@ -48,8 +49,8 @@ namespace CardGameHelper.Models
 
         public void AddCard(Card c)
         {
-            Cards.Add(c);
             db.AddCard(c);
+            Cards.Add(c);
         }
 
         public void AddDeck(Deck deck)
@@ -61,25 +62,25 @@ namespace CardGameHelper.Models
         public void UpdateDeck(Deck deck)
         {
             var old = Decks.Single(d => d.Id == deck.Id);
-            Decks[Decks.IndexOf(old)] = deck;
 
             if (old.Id == SelectedDeck.OriginalId)
             {
                 SelectedDeck = deck.AsCopy();
             }
 
+            Decks[Decks.IndexOf(old)] = deck;
             db.UpdateDeck(deck);
         }
 
         public void RemoveDeck(Deck deck)
         {
-            Decks.Remove(deck);
             if (SelectedDeck.OriginalId == deck.Id)
             {
-                SelectedDeck = Decks[0].AsCopy();
+                SelectedDeck = Decks.First().AsCopy();
             }
 
             db.DeleteDeck(deck);
+            Decks.Remove(deck);
         }
     }
 }
