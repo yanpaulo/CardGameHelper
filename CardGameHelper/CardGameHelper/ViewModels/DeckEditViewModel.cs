@@ -88,6 +88,18 @@ namespace CardGameHelper.ViewModels
             DeckCards = cards;
         }
 
+        public void Reset()
+        {
+            if (EditMode)
+            {
+                Deck = context.Decks.Single(d => d.Id == Deck.OriginalId).AsCopy();
+            }
+            else
+            {
+                Deck = context.ResetSelectedDeck(); 
+            }
+        }
+
         public void AddCard(DeckEditViewModelItem model)
         {
             var deckCard = model.DeckCard;

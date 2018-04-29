@@ -111,6 +111,7 @@
   <ItemGroup>
     <Content Include="icon_add.png" />
     <Content Include="icon_add_black.png" />
+    <Content Include="icon_refresh.png" />
     <Content Include="icon_remove.png" />
     <Content Include="icon_save.png" />
     <Content Include="icon_select.png" />

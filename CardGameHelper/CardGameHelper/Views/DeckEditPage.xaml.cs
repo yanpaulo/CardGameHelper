@@ -84,5 +84,10 @@ namespace CardGameHelper.Views
                 
             }
         }
+
+        private void ResetToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            viewModel.Reset();
+        }
     }
 }

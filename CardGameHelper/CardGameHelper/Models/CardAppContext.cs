@@ -75,5 +75,10 @@ namespace CardGameHelper.Models
             db.DeleteDeck(deck);
             Decks.Remove(deck);
         }
+
+        public Deck ResetSelectedDeck()
+        {
+            return SelectedDeck = Decks.Single(d => d.Id == SelectedDeck.OriginalId).AsCopy();
+        }
     }
 }

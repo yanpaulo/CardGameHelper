@@ -80,4 +80,7 @@
             </StackLayout>
         </Grid>
     </ContentView.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Reset" Icon="icon_refresh.png" Clicked="ResetToolbarItem_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
 </ContentPage>
