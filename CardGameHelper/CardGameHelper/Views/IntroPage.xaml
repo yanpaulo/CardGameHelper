@@ -18,9 +18,9 @@
                     <Image Source="intro1.png"></Image>
                     <Label Text="In the Decks screen you can (1) Create a deck, (2) Edit a deck, (3) Select a deck or (4) Delete a deck."></Label>
                     <Image Source="intro2.png"></Image>
-                    <Label Text="Tapping on a Deck name (2 as shown above) will open the Edit Deck screen. There you can add or remove cards as much as you like."></Label>
+                    <Label Text="Tapping on a Deck name (2 as shown above) will open the Deck Edit screen. There you can add or remove cards as much as you like."></Label>
                     <Label Text="To add a card, search for its name in the Search Box (5) and then click in the Add Button (6) next to the card's name."></Label>
-                    <Label Text="You may also want to remove a card from the deck and to do so, click on the Remove Button (7) right to the card's name."></Label>
+                    <Label Text="You may also want to remove a card from the deck and to do so, click on the Remove Button (7) next to the card's name."></Label>
                     <Image Source="intro3.png"></Image>
                     <Label Text="If the app doen't know about any card with the searched name, the Create Button (8) will appear."></Label>
                     <Image Source="intro4.png"></Image>
@@ -34,7 +34,7 @@
                     <Label Text="The Main screen works just like the Deck Edit screen, except that changes made there won't affect your Deck."></Label>
                     <Label Text="You can see it as if it was a copy of your selected Deck, so go on and track your matches using the Main Screen. =)"></Label>
                     <Image Source="intro8.png"></Image>
-                    <Label Text="If you want to reset the Deck to its original state, press the Reset Button(12) shown above. This button is also available in the Deck Edit screen."></Label>
+                    <Label Text="If you want to reset the Deck to its original state, press the Reset Button (12) shown above. This button is also available in the Deck Edit screen."></Label>
                 </StackLayout>
             </ScrollView>
 

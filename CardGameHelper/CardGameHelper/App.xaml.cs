@@ -15,7 +15,15 @@ namespace CardGameHelper
         {
             InitializeComponent();
 
-            MainPage = new RootPage();
+            if (Properties.ContainsKey("FirstUse"))
+            {
+                MainPage = new RootPage();
+            }
+            else
+            {
+                Properties.Add("FirstUse", false);
+                MainPage = new IntroHostPage();
+            }
         }
 
         protected override void OnStart()
