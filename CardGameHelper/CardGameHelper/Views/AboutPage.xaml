@@ -5,8 +5,8 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Tracker for Gwent" Style="{DynamicResource  TitleStyle}"></Label>
-            <Label Text="This is an app developed to help players to track their matchers in the wonderful Gowne card game." />
-            <Label Text="It is an independant app and so it or doesn't have anything to do with Gwent's developer or publisher." />
+            <Label Text="This is an app developed to help players to track their matchers in the wonderful Gwent card game." />
+            <Label Text="It is a nonprofit and independant app and so it or doesn't have anything to do with Gwent's developer or publisher." />
             <Label Text="Hope you enjoy this app =)"></Label>
             <Label Text="Cheers."></Label>
             <Button Text="View Tutorial" Clicked="TutorialButton_Clicked"></Button>
