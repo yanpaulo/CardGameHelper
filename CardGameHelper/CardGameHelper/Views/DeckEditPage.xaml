@@ -25,7 +25,14 @@
                 <SearchBar 
                     Text="{Binding SearchText}"
                     Placeholder="Search or create cards"
-                    TextChanged="SearchBar_TextChanged"></SearchBar>
+                    TextChanged="SearchBar_TextChanged">
+                    <SearchBar.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="40"></On>
+                            <On Platform="iOS, UWP" Value="-1"></On>
+                        </OnPlatform>
+                    </SearchBar.HeightRequest>
+                </SearchBar>
                 <Button 
                     Grid.Column="1" 
                     Image="icon_add_black.png"
