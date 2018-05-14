@@ -36,7 +36,7 @@
                 <Button 
                     Grid.Column="1" 
                     Image="icon_add_black.png"
-                    IsVisible="{Binding CardsFound, Converter={StaticResource NegatedValueConverter}}"
+                    IsVisible="{Binding CardCreateEnabled}"
                     Clicked="CreateCardButton_Clicked" Text="Create"></Button>
             </Grid>
 

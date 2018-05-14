@@ -31,8 +31,8 @@ namespace CardGameHelper.ViewModels
             set { searchText = value; OnPropertyChanged(); }
         }
 
-        public bool CardsFound =>
-            DeckCards.Count > 0;
+        public bool CardCreateEnabled =>
+            DeckCards.Count == 0 && !string.IsNullOrWhiteSpace(SearchText);
 
         public Deck Deck
         {
@@ -53,7 +53,7 @@ namespace CardGameHelper.ViewModels
             {
                 deckCards = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(CardsFound));
+                OnPropertyChanged(nameof(CardCreateEnabled));
             }
         }
 
