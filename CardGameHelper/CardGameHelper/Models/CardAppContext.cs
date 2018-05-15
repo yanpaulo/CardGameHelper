@@ -67,13 +67,14 @@ namespace CardGameHelper.Models
 
         public void RemoveDeck(Deck deck)
         {
+            Decks.Remove(deck);
+            db.DeleteDeck(deck);
+
             if (SelectedDeck.OriginalId == deck.Id)
             {
                 SelectedDeck = Decks.First().AsCopy();
             }
 
-            db.DeleteDeck(deck);
-            Decks.Remove(deck);
         }
 
         public Deck ResetDeck(Deck deck)
